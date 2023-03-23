@@ -15,7 +15,6 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("inserisci una nazione:");
         String filteredString = scan.nextLine();
-        filteredString = '%' + filteredString + '%';
         scan.close();
 
 
@@ -31,7 +30,7 @@ public class Main {
 
             try(PreparedStatement ps = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY)){
-                ps.setString(1, filteredString);
+                ps.setString(1, "%" + filteredString + "%");
 
                 try(ResultSet rs = ps.executeQuery()){
                     String outputString = "";
