@@ -1,16 +1,27 @@
+package learning.java.dbNations;
+
 import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-//        SELECT countries.name, countries.country_id, regions.name, continents.name FROM `countries`
-//        INNER JOIN regions on countries.region_id = regions.region_id
-//        INNER JOIN continents on regions.continent_id = continents.continent_id
-//        ORDER BY countries.name;
-        String url = "jdbc:mysql://localhost:3306/db-nations";
-        String user = "root";
-        String password = "root";
 
+    private static final String url = "jdbc:mysql://localhost:3306/db-nations";
+    private static final String user = "root";
+    private static final String password = "root";
+
+    public static String getUrl() {
+        return url;
+    }
+
+    public static String getUser() {
+        return user;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         System.out.println("inserisci una nazione:");
@@ -18,7 +29,7 @@ public class Main {
         scan.close();
 
 
-        try (Connection con = DriverManager.getConnection(url, user, password)){
+        try (Connection con = DriverManager.getConnection(getUrl(), getUser(), getPassword())){
             //System.out.println("ciao");
             String query = """
                     SELECT countries.name, countries.country_id, regions.name, continents.name FROM `countries`
@@ -48,6 +59,8 @@ public class Main {
 
                 }
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
