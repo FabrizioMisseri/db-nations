@@ -46,13 +46,17 @@ public class Main {
                 try(ResultSet rs = ps.executeQuery()){
                     String outputString = "";
 
-                    while (rs.next()){
-                        String nameCountry = rs.getString(1);
-                        Integer countryId = rs.getInt(2);
-                        String nameRegion = rs.getString(3);
-                        String nameContinent = rs.getString(4);
+                    if (rs.next()) {
+                        do {
+                            String nameCountry = rs.getString(1);
+                            Integer countryId = rs.getInt(2);
+                            String nameRegion = rs.getString(3);
+                            String nameContinent = rs.getString(4);
 
-                        outputString += nameCountry +" "+ countryId +" "+ nameRegion +" "+ nameContinent +" "+ "\n";
+                            outputString += nameCountry +" "+ countryId +" "+ nameRegion +" "+ nameContinent +" "+ "\n";
+                        } while (rs.next());
+                    } else {
+                        System.out.println("niente");
                     }
 
                     System.out.println(outputString);
